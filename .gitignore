@@ -36,3 +36,4 @@ build-CRC-Desktop_x86_windows_msys_pe_64bit-Debug/debug/main.o
 build-CRC-Desktop_x86_windows_msys_pe_64bit-Debug/Makefile
 build-CRC-Desktop_x86_windows_msys_pe_64bit-Debug/Makefile.Debug
 build-CRC-Desktop_x86_windows_msys_pe_64bit-Debug/Makefile.Release
+*.idx

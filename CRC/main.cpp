@@ -23,7 +23,7 @@ int intialize()
     quotient = (int*)malloc(m_size * sizeof(int));
     rem  = (int*)malloc(g_size * sizeof(int));
 }
-int check_valid(int data[])
+void check_valid(int data[])
 {
     int i;
     for(i=0;i<m_size;i++)
@@ -43,7 +43,7 @@ int check_valid(int data[])
         }
     }
 }
-int copy_databit()
+void copy_databit()
 {
     int len=0,i;
     range = m_size+(g_size-1);
@@ -68,7 +68,7 @@ int copy_databit()
         rem[i]=1;
     }
 }
-int shift_rem(int rem[],int data_bit[])
+void shift_rem(int rem[],int data_bit[])
 {
     int i;
     for(i=0;i<g_size-1;i++)
@@ -76,7 +76,7 @@ int shift_rem(int rem[],int data_bit[])
     rem[i] = data_bit[g_size + shift];
     shift++;
 }
-int initial_rem(int bits[],int div[])
+void initial_rem(int bits[],int div[])
 {
     int i;
     quotient[0]=1;
@@ -84,7 +84,7 @@ int initial_rem(int bits[],int div[])
         rem[i] = bits[i] ^ div[i];
     shift_rem(rem,bits);
 }
-int reminder(int rem[],int div[])
+void reminder(int rem[],int div[])
 {
     int i;
     for(i=0;i<g_size;i ++)
@@ -175,10 +175,13 @@ int main()
         }
         design();
         sleep(2);
-        if(error)
+        if(error){
             printf("\n\nError detected in the recieved message\n\n");
-        else
+            printf("%d",error);
+        }
+        else{
             printf("\n\nNo error detected in the recieved message\n\n");
+        }
         design();
         printf("\n\nDo you want to check again(y/Y): ");
         scanf("\n%c",&choice1);
