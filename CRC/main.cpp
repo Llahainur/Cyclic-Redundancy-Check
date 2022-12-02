@@ -1,30 +1,33 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
+
 int m_size,g_size,count=0,range,shift=0;
 int *data,*gen,*temp,*cpy_gen,*cpy_0,*rem,*quotient,*temp_db;
+
 int intialize()
 {
     int i;
 //    printf("Enter the length of Data Message\n");
 //    scanf("%d",&m_size);
-    m_size=11;
+    m_size=11;//длина сообщения
     data = (int*)malloc(m_size * sizeof(int));
-    printf("Enter the Data Message\n");
+    printf("Enter the Data Message\n");//передаваемое сообщение
     for(i=0;i<m_size;i++)
         scanf("%d",data+i);
 //    printf("Enter the length of Generator\n");
 //    scanf("%d",&g_size);
-    g_size=5;
+    g_size=5;//длина ген полинома
     gen = (int*)malloc(g_size * sizeof(int));
 //    printf("Enter the Generator Bit\n");
 //    for(i=0;i<g_size;i++)
 //        scanf("%d",gen+i);
-    *(gen+0)=1;
+    *(gen+0)=1;//генерирующий полином - мой
     *(gen+1)=1;//x^4+x^3+1
     *(gen+2)=0;
     *(gen+3)=0;
     *(gen+4)=1;//задаем генерирующий полином
+                //можете потом сделать форки с своими
     printf("G\n");
         for(i=0;i<g_size;i++)
             printf("%d",*(gen+i));
@@ -42,7 +45,7 @@ void check_valid(int data[])
     {
         if(data[i] > 1 || data[i] < 0)
         {
-            printf("Invalid data stream\n");
+            printf("Invalid data stream\n");//проверка корректности ввода данных (только 0 или 1)
             exit(0);
         }
     }
@@ -166,7 +169,7 @@ int main()
     check_valid(data);
     syndrome(temp_db);
     design();
-    //sleep(2);
+    //sleep(2);//Эмулирует задумчивость компа
     display();
     design();
     printf("\n\nChecking for errors in recieved message\n\n");
@@ -195,11 +198,8 @@ int main()
             for(i=0;i<g_size-1;i++)
             {
 
-                printf("%d",rem[i]);
-//                if(rem[i]==1){
-//                    syndr_w++;
-//                    //printf("weight %d",syndr_w);//добавить обнаружение ошибок
-//                }
+                printf("%d",rem[i]);//как я понял, rem - синдром ошибки.  Harshavardhan не сделал исправление ошибки, при любом ненулевом остатке программма выводит алерт
+                                    //и прекращает работу
             }
             printf("\n");
 
