@@ -6,18 +6,30 @@ int *data,*gen,*temp,*cpy_gen,*cpy_0,*rem,*quotient,*temp_db;
 int intialize()
 {
     int i;
-    printf("Enter the length of Data Message\n");
-    scanf("%d",&m_size);
+//    printf("Enter the length of Data Message\n");
+//    scanf("%d",&m_size);
+    m_size=11;
     data = (int*)malloc(m_size * sizeof(int));
     printf("Enter the Data Message\n");
     for(i=0;i<m_size;i++)
         scanf("%d",data+i);
-    printf("Enter the length of Generator\n");
-    scanf("%d",&g_size);
+//    printf("Enter the length of Generator\n");
+//    scanf("%d",&g_size);
+    g_size=5;
     gen = (int*)malloc(g_size * sizeof(int));
-    printf("Enter the Generator Bit\n");
-    for(i=0;i<g_size;i++)
-        scanf("%d",gen+i);
+//    printf("Enter the Generator Bit\n");
+//    for(i=0;i<g_size;i++)
+//        scanf("%d",gen+i);
+    *(gen+0)=1;
+    *(gen+1)=1;//x^4+x^3+1
+    *(gen+2)=0;
+    *(gen+3)=0;
+    *(gen+4)=1;//задаем генерирующий полином
+    printf("G\n");
+        for(i=0;i<g_size;i++)
+            printf("%d",*(gen+i));
+    printf("\n");
+
     cpy_gen = (int*)malloc(g_size * sizeof(int));
     cpy_0 = (int*)malloc(g_size * sizeof(int));
     quotient = (int*)malloc(m_size * sizeof(int));
@@ -154,7 +166,7 @@ int main()
     check_valid(data);
     syndrome(temp_db);
     design();
-    sleep(2);
+    //sleep(2);
     display();
     design();
     printf("\n\nChecking for errors in recieved message\n\n");
@@ -174,10 +186,23 @@ int main()
             case 3:exit(0);
         }
         design();
-        sleep(2);
+        //sleep(2);
         if(error){
             printf("\n\nError detected in the recieved message\n\n");
-            printf("%d",error);
+            //printf("%d",error);
+            int syndr_w=0;
+            printf("\n\nSyndrome\n\n");
+            for(i=0;i<g_size-1;i++)
+            {
+
+                printf("%d",rem[i]);
+//                if(rem[i]==1){
+//                    syndr_w++;
+//                    //printf("weight %d",syndr_w);//добавить обнаружение ошибок
+//                }
+            }
+            printf("\n");
+
         }
         else{
             printf("\n\nNo error detected in the recieved message\n\n");
