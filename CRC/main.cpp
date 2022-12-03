@@ -1,9 +1,27 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
+#include<vector>
 
 int m_size,g_size,count=0,range,shift=0;
 int *data,*gen,*temp,*cpy_gen,*cpy_0,*rem,*quotient,*temp_db;
+
+int finderror(){//это должно находить разряд ошибки...в теории
+    int errvec[11][4] = {{1,1,0,0},{0,1,1,0},{0,0,1,1},{1,1,0,1},{1,0,1,0},
+                         {0,1,0,1},{1,1,1,0},{0,1,1,1},{1,1,1,1},{1,0,1,1},{1,0,0,1}};
+    int error[g_size-1];
+    int i;
+    for(i=0;i<g_size-1;i++)
+    {
+        error[i]=rem[i];
+    }
+
+    for(i=0;i<11;i++){
+        if(error==errvec[i]){
+            return i;
+        }
+    }
+}
 
 int intialize()
 {
@@ -198,14 +216,19 @@ int main()
             int sum=0;
             for(i=0;i<g_size-1;i++)
             {
-                sum+=rem[i]*(2<<(4-i));
-                printf("Gsum= %d",sum);
+                sum+=rem[i];
+                //printf("Gsum= %d",sum);
                 printf("%d",rem[i]);//как я понял, rem - синдром ошибки.  Harshavardhan не сделал исправление ошибки, при любом ненулевом остатке программма выводит алерт
                                     //и прекращает работу
             }
 
-            printf("\n");
-            printf("Gnum= %d",sum);
+//            int err = finderror(); функция выдает странное большое число.
+
+//            printf("\n");
+//            printf("error in %i",err);
+
+
+            //printf("Gnum= %d",sum);
 
         }
         else{
