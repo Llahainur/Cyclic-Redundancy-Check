@@ -195,13 +195,17 @@ int main()
             //printf("%d",error);
             int syndr_w=0;
             printf("\n\nSyndrome\n\n");
+            int sum=0;
             for(i=0;i<g_size-1;i++)
             {
-
+                sum+=rem[i]*(2<<(4-i));
+                printf("Gsum= %d",sum);
                 printf("%d",rem[i]);//как я понял, rem - синдром ошибки.  Harshavardhan не сделал исправление ошибки, при любом ненулевом остатке программма выводит алерт
                                     //и прекращает работу
             }
+
             printf("\n");
+            printf("Gnum= %d",sum);
 
         }
         else{
